@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion Editor - Modern Rich Text Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@angular/core@19.0.0/bundles/core.umd.js"></script>
+    <script src="https://unpkg.com/@angular/common@19.0.0/bundles/common.umd.js"></script>
+    <script src="https://unpkg.com/@angular/compiler@19.0.0/bundles/compiler.umd.js"></script>
+    <script src="https://unpkg.com/@angular/platform-browser@19.0.0/bundles/platform-browser.umd.js"></script>
+    <script src="https://unpkg.com/@angular/platform-browser-dynamic@19.0.0/bundles/platform-browser-dynamic.umd.js"></script>
+    <script src="https://unpkg.com/rxjs@7.8.1/dist/bundles/rxjs.umd.js"></script>
+    <script src="https://unpkg.com/zone.js@0.14.0/dist/zone.js"></script>
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f5f5f5;
+            --gray: #333;
+            --gray-light: #444;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --editor-bg: #1e1e1e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: #3dc3ba;
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: #aaa;
+            margin-bottom: 60px;
+            max-width: 700px;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--darker) 0%, #1a1a1a 100%);
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 107, 107, 0.15) 0%, transparent 40%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+        
+        .hero h1 {
+            font-size: 70px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #aaa;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .hero-pattern {
+            position: absolute;
+            right: -200px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .hero-pattern svg {
+            width: 800px;
+            height: 800px;
+        }
+        
+        /* Features Section */
+        .features {
+            background: var(--dark);
+            position: relative;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--primary);
+            z-index: -1;
+            transition: var(--transition);
+            opacity: 0.1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card:hover:before {
+            height: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--secondary);
+            margin-bottom: 25px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: #aaa;
+        }
+        
+        /* Editor Demo */
+        .editor-demo {
+            position: relative;
+        }
+        
+        .editor-container {
+            background: var(--editor-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .editor-container:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .toolbar-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .toolbar-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .editor-content {
+            min-height: 400px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            outline: none;
+        }
+        
+        .editor-content:focus {
+            box-shadow: 0 0 0 2px var(--secondary);
+        }
+        
+        .editor-content h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .editor-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .editor-content ul, .editor-content ol {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .editor-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            background: var(--dark);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--primary);
+            z-index: -1;
+            transition: var(--transition);
+            opacity: 0.1;
+        }
+        
+        .pricing-card:hover:before {
+            height: 100%;
+        }
+        
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: #aaa;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray);
+            color: #aaa;
+        }
+        
+        .pricing-features li:before {
+            content: '✓';
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--secondary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #aaa;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            color: var(--light);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray);
+            color: var(--light);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .footer-title {
+            font-size: 20px;
+            color: var(--light);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 50px;
+            }
+            
+            .editor-container {
+                padding: 20px;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Angular App Root -->
+    <fusion-editor-app>
+        <!-- Header -->
+        <header [class.scrolled]="isScrolled">
+            <div class="container header-container">
+                <a href="#/home" class="logo">
+                    <i class="fas fa-code"></i>
+                    Fusion Editor
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#home" (click)="scrollTo('home')">Home</a></li>
+                        <li><a href="#features" (click)="scrollTo('features')">Features</a></li>
+                        <li><a href="#demo" (click)="scrollTo('demo')">Demo</a></li>
+                        <li><a href="#pricing" (click)="scrollTo('pricing')">Pricing</a></li>
+                        <li><a href="#contact" (click)="scrollTo('contact')">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-toggle" (click)="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Home Section -->
+        <section id="home" class="hero">
+            <div class="hero-pattern">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="10 5"></path>
+                </svg>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>The Ultimate Editor for Modern Content Creation</h1>
+                    <p>Fusion Editor is a powerful, extensible rich text editor built for the modern web. Create beautiful documents with ease, collaborate in real-time, and integrate seamlessly with your application.</p>
+                    <div class="hero-btns">
+                        <a href="#demo" class="btn" (click)="scrollTo('demo')">Try Demo</a>
+                        <a href="#pricing" class="btn btn-secondary" (click)="scrollTo('pricing')">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features" class="features fade-in">
+            <div class="container">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Fusion Editor comes packed with everything you need for modern content creation and collaboration.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card" *ngFor="let feature of features">
+                        <div class="feature-icon">
+                            <i [class]="feature.icon"></i>
+                        </div>
+                        <h3>{{feature.title}}</h3>
+                        <p>{{feature.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Demo Section -->
+        <section id="demo" class="editor-demo fade-in">
+            <div class="container">
+                <h2 class="section-title">Live Demo</h2>
+                <p class="section-subtitle">Experience the power and simplicity of Fusion Editor right in your browser.</p>
+                
+                <div class="editor-container">
+                    <div class="editor-toolbar">
+                        <button class="toolbar-btn"><i class="fas fa-bold"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-italic"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-underline"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-strikethrough"></i></button>
+                        <div style="width: 1px; background: var(--gray); height: 30px; margin: 0 10px;"></div>
+                        <button class="toolbar-btn"><i class="fas fa-heading"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-quote-right"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-code"></i></button>
+                        <div style="width: 1px; background: var(--gray); height: 30px; margin: 0 10px;"></div>
+                        <button class="toolbar-btn"><i class="fas fa-list-ul"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-list-ol"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-outdent"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-indent"></i></button>
+                        <div style="width: 1px; background: var(--gray); height: 30px; margin: 0 10px;"></div>
+                        <button class="toolbar-btn"><i class="fas fa-link"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-image"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-table"></i></button>
+                        <div style="width: 1px; background: var(--gray); height: 30px; margin: 0 10px;"></div>
+                        <button class="toolbar-btn"><i class="fas fa-undo"></i></button>
+                        <button class="toolbar-btn"><i class="fas fa-redo"></i></button>
+                    </div>
+                    <div class="editor-content" contenteditable="true">
+                        <h2>Welcome to Fusion Editor</h2>
+                        <p>This is a live demo of our powerful rich text editor. Try editing this text to experience the intuitive interface and features.</p>
+                        
+                        <p>You can:</p>
+                        <ul>
+                            <li>Format text with <strong>bold</strong>, <em>italic</em>, or <u>underline</u></li>
+                            <li>Create bulleted and numbered lists</li>
+                            <li>Add headings of different sizes</li>
+                            <li>Insert images, links, and tables</li>
+                            <li>Undo and redo changes</li>
+                            <li>And much more!</li>
+                        </ul>
+                        
+                        <p>Fusion Editor is designed for both technical and non-technical users. With its clean interface and powerful features, you can create professional documents in minutes.</p>
+                        
+                        <h3>Get Started Today</h3>
+                        <p>Ready to integrate Fusion Editor into your application? <a href="#pricing" style="color: var(--secondary);" (click)="scrollTo('pricing')">View our pricing plans</a> or <a href="#contact" style="color: var(--secondary);" (click)="scrollTo('contact')">contact us</a> for custom solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing fade-in">
+            <div class="container">
+                <h2 class="section-title">Simple Pricing</h2>
+                <p class="section-subtitle">Choose the plan that works best for you and your team. All plans include our core features.</p>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card" [class.featured]="plan.featured" *ngFor="let plan of plans">
+                        <h3>{{plan.title}}</h3>
+                        <div class="price">${{plan.price}}<span>/{{plan.period}}</span></div>
+                        <ul class="pricing-features">
+                            <li *ngFor="let feature of plan.features">{{feature}}</li>
+                        </ul>
+                        <a href="#" class="btn" [class.btn-secondary]="plan.featured">{{plan.button}}</a>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 100px;">
+                    <h2 class="section-title">What Our Users Say</h2>
+                    <p class="section-subtitle">Don't just take our word for it - hear from our satisfied customers.</p>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+                            <div class="testimonial-content">{{testimonial.content}}</div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">{{testimonial.author.charAt(0)}}</div>
+                                <div class="author-info">
+                                    <h4>{{testimonial.author}}</h4>
+                                    <p>{{testimonial.role}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="contact fade-in">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Have questions about Fusion Editor? Our team is ready to help.</p>
+                
+                <form #contactForm="ngForm" (ngSubmit)="sendMessage()">
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company" class="form-control" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="plan">Interested Plan</label>
+                            <select id="plan" name="plan" class="form-control" ngModel>
+                                <option value="">Select a plan</option>
+                                <option value="starter">Starter</option>
+                                <option value="pro">Pro</option>
+                                <option value="business">Business</option>
+                                <option value="enterprise">Enterprise</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" required ngModel>
+                        </div>
+                        <div class="form-group full">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" class="form-control" required ngModel></textarea>
+                        </div>
+                        <div class="form-group full">
+                            <button type="submit" class="btn">Send Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-about">
+                        <a href="#" class="footer-logo">
+                            <i class="fas fa-code"></i>
+                            Fusion Editor
+                        </a>
+                        <p>The next-generation rich text editor for modern web applications. Powerful, customizable, and developer-friendly.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links-container">
+                        <h3 class="footer-title">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home" (click)="scrollTo('home')">Home</a></li>
+                            <li><a href="#features" (click)="scrollTo('features')">Features</a></li>
+                            <li><a href="#demo" (click)="scrollTo('demo')">Demo</a></li>
+                            <li><a href="#pricing" (click)="scrollTo('pricing')">Pricing</a></li>
+                            <li><a href="#contact" (click)="scrollTo('contact')">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-container">
+                        <h3 class="footer-title">Resources</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API Reference</a></li>
+                            <li><a href="#">Tutorials</a></li>
+                            <li><a href="#">Examples</a></li>
+                            <li><a href="#">GitHub Repository</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-container">
+                        <h3 class="footer-title">Contact</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Developer St, San Francisco</li>
+                            <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                            <li><i class="fas fa-envelope"></i> contact@fusioneditor.io</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 Fusion Editor. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </fusion-editor-app>
+
+    <script type="text/javascript">
+        // Define Angular components
+        const { Component, NgModule, VERSION } = ng.core;
+        const { CommonModule } = ng.common;
+        const { BrowserModule } = ng.platformBrowser;
+        const { FormsModule } = ng.forms;
+        
+        // App Component
+        Component({
+            selector: 'fusion-editor-app',
+            template: document.querySelector('fusion-editor-app').innerHTML
+        }).Class({
+            constructor: function() {
+                this.features = [
+                    { icon: 'fas fa-font', title: 'Rich Text Formatting', description: 'Full text formatting options including bold, italic, underline, strikethrough, and more.' },
+                    { icon: 'fas fa-heading', title: 'Headings & Paragraphs', description: 'Multiple heading levels and paragraph styles for structured content.' },
+                    { icon: 'fas fa-list', title: 'Lists', description: 'Create ordered and unordered lists with nesting support.' },
+                    { icon: 'fas fa-link', title: 'Links & Media', description: 'Insert hyperlinks, images, videos, and other media content.' },
+                    { icon: 'fas fa-table', title: 'Tables', description: 'Create and edit complex tables with cell formatting options.' },
+                    { icon: 'fas fa-code', title: 'Code Blocks', description: 'Syntax-highlighted code blocks with support for multiple languages.' },
+                    { icon: 'fas fa-comments', title: 'Real-time Collaboration', description: 'Work together with your team in real-time with collaborative editing.' },
+                    { icon: 'fas fa-history', title: 'Version History', description: 'Track changes and revert to previous versions with our built-in history.' }
+                ];
+                
+                this.plans = [
+                    {
+                        title: 'Starter',
+                        price: '0',
+                        period: 'forever',
+                        features: [
+                            'Basic text formatting',
+                            'Up to 3 documents',
+                            'Community support',
+                            '1GB storage',
+                            'Markdown export'
+                        ],
+                        button: 'Get Started',
+                        featured: false
+                    },
+                    {
+                        title: 'Pro',
+                        price: '9',
+                        period: 'per month',
+                        features: [
+                            'Advanced formatting',
+                            'Unlimited documents',
+                            'Priority support',
+                            '10GB storage',
+                            'Export to PDF & Word',
+                            'Collaboration features',
+                            'Version history (30 days)'
+                        ],
+                        button: 'Start Free Trial',
+                        featured: true
+                    },
+                    {
+                        title: 'Business',
+                        price: '29',
+                        period: 'per month',
+                        features: [
+                            'All Pro features',
+                            'Team management',
+                            'Custom branding',
+                            '100GB storage',
+                            'Advanced integrations',
+                            'Version history (1 year)',
+                            'Dedicated account manager'
+                        ],
+                        button: 'Contact Sales',
+                        featured: false
+                    }
+                ];
+                
+                this.testimonials = [
+                    {
+                        content: "Fusion Editor has transformed how our content team works. The collaboration features alone have saved us dozens of hours each week.",
+                        author: "Sarah Johnson",
+                        role: "Content Director, TechCorp"
+                    },
+                    {
+                        content: "As a developer, I appreciate how easy it is to integrate and customize. The API is well-documented and the community support is excellent.",
+                        author: "Michael Chen",
+                        role: "Lead Developer, StartupX"
+                    },
+                    {
+                        content: "We switched from another editor and haven't looked back. The performance and feature set are unmatched at this price point.",
+                        author: "Emily Rodriguez",
+                        role: "Product Manager, Innovate Inc"
+                    }
+                ];
+                
+                this.isScrolled = false;
+                
+                // Scroll event listener
+                window.onscroll = () => {
+                    this.isScrolled = window.scrollY > 50;
+                };
+            },
+            
+            scrollTo: function(id) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+                this.toggleMenu();
+            },
+            
+            toggleMenu: function() {
+                const nav = document.querySelector('nav ul');
+                if (window.innerWidth < 768) {
+                    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+                }
+            },
+            
+            sendMessage: function() {
+                alert('Thank you for your message! We will get back to you soon.');
+            }
+        });
+        
+        // App Module
+        NgModule({
+            imports: [BrowserModule, FormsModule],
+            declarations: [AppComponent],
+            bootstrap: [AppComponent]
+        }).Class({
+            constructor: function() {}
+        });
+        
+        // Create App Component
+        const AppComponent = class {
+            static annotations = [
+                new Component({
+                    selector: 'fusion-editor-app',
+                    template: document.querySelector('fusion-editor-app').innerHTML
+                })
+            ];
+        };
+        
+        // Bootstrap the application
+        document.addEventListener('DOMContentLoaded', () => {
+            ng.platformBrowserDynamic
+                .bootstrapModule(AppModule)
+                .catch(err => console.error(err));
+        });
+    </script>
+</body>
+</html>
