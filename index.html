@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,8 @@
     <script src="https://unpkg.com/@angular/common@19.0.0/bundles/common.umd.js"></script>
     <script src="https://unpkg.com/@angular/compiler@19.0.0/bundles/compiler.umd.js"></script>
     <script src="https://unpkg.com/@angular/platform-browser@19.0.0/bundles/platform-browser.umd.js"></script>
-    <script src="https://unpkg.com/@angular/platform-browser-dynamic@19.0.0/bundles/platform-browser-dynamic.umd.js"></script>
+    <script
+        src="https://unpkg.com/@angular/platform-browser-dynamic@19.0.0/bundles/platform-browser-dynamic.umd.js"></script>
     <script src="https://unpkg.com/rxjs@7.8.1/dist/bundles/rxjs.umd.js"></script>
     <script src="https://unpkg.com/zone.js@0.14.0/dist/zone.js"></script>
     <style>
@@ -25,13 +27,13 @@
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             --editor-bg: #1e1e1e;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--darker);
@@ -39,17 +41,17 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         section {
             padding: 100px 0;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 14px 32px;
@@ -66,35 +68,35 @@
             text-decoration: none;
             box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
-        
+
         .btn:hover {
             background: #ff5252;
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
         }
-        
+
         .btn-secondary {
             background: var(--secondary);
             box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
         }
-        
+
         .btn-secondary:hover {
             background: #3dc3ba;
             box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
         }
-        
+
         .btn-outline {
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
             margin-left: 15px;
         }
-        
+
         .btn-outline:hover {
             background: var(--primary);
             color: white;
         }
-        
+
         .section-title {
             font-size: 42px;
             font-weight: 700;
@@ -102,7 +104,7 @@
             position: relative;
             display: inline-block;
         }
-        
+
         .section-title:after {
             content: '';
             position: absolute;
@@ -112,14 +114,14 @@
             height: 4px;
             background: var(--primary);
         }
-        
+
         .section-subtitle {
             font-size: 20px;
             color: #aaa;
             margin-bottom: 60px;
             max-width: 700px;
         }
-        
+
         /* Header Styles */
         header {
             position: fixed;
@@ -130,20 +132,20 @@
             z-index: 1000;
             transition: var(--transition);
         }
-        
+
         header.scrolled {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             padding: 15px 0;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
             font-size: 28px;
             font-weight: 700;
@@ -152,21 +154,21 @@
             display: flex;
             align-items: center;
         }
-        
+
         .logo i {
             margin-right: 10px;
             color: var(--secondary);
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
         }
-        
+
         nav ul li {
             margin: 0 20px;
         }
-        
+
         nav ul li a {
             color: var(--light);
             text-decoration: none;
@@ -175,7 +177,7 @@
             position: relative;
             transition: var(--transition);
         }
-        
+
         nav ul li a:after {
             content: '';
             position: absolute;
@@ -186,15 +188,15 @@
             background: var(--primary);
             transition: var(--transition);
         }
-        
+
         nav ul li a:hover {
             color: var(--primary);
         }
-        
+
         nav ul li a:hover:after {
             width: 100%;
         }
-        
+
         .mobile-toggle {
             display: none;
             background: none;
@@ -203,7 +205,7 @@
             font-size: 24px;
             cursor: pointer;
         }
-        
+
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -213,7 +215,7 @@
             overflow: hidden;
             background: linear-gradient(135deg, var(--darker) 0%, #1a1a1a 100%);
         }
-        
+
         .hero:before {
             content: '';
             position: absolute;
@@ -224,13 +226,13 @@
             background: radial-gradient(circle at top right, rgba(255, 107, 107, 0.15) 0%, transparent 40%);
             z-index: 1;
         }
-        
+
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             max-width: 700px;
         }
-        
+
         .hero h1 {
             font-size: 70px;
             font-weight: 800;
@@ -240,47 +242,272 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .hero p {
             font-size: 20px;
             color: #aaa;
             margin-bottom: 40px;
             max-width: 600px;
         }
-        
+
         .hero-btns {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
-        .hero-pattern {
+
+        /* ANIMATED EDITOR BACKGROUND */
+        .editor-background {
             position: absolute;
-            right: -200px;
             top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.3;
+            right: -100px;
+            transform: translateY(-50%) perspective(1000px) rotateY(10deg);
+            width: 800px;
+            height: 500px;
+            z-index: 2;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            opacity: 0.9;
+            background: var(--editor-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .editor-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.05), rgba(78, 205, 196, 0.05));
             z-index: 1;
         }
-        
-        .hero-pattern svg {
-            width: 800px;
-            height: 800px;
+
+        .editor-header {
+            height: 50px;
+            background: rgba(30, 30, 30, 0.9);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--gray);
+            position: relative;
+            z-index: 2;
         }
-        
+
+        .editor-tabs {
+            display: flex;
+            gap: 15px;
+        }
+
+        .editor-tab {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            font-size: 14px;
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .editor-tab.active {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--primary);
+        }
+
+        .editor-body {
+            padding: 20px;
+            height: calc(100% - 50px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .editor-line {
+            height: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 10px;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .editor-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: rgba(78, 205, 196, 0.2);
+            animation: typing 3s infinite;
+        }
+
+        .editor-line:nth-child(1)::before {
+            animation-delay: 0.5s;
+            width: 80%;
+        }
+
+        .editor-line:nth-child(2)::before {
+            animation-delay: 1s;
+            width: 60%;
+        }
+
+        .editor-line:nth-child(3)::before {
+            animation-delay: 1.5s;
+            width: 70%;
+        }
+
+        .editor-line:nth-child(4)::before {
+            animation-delay: 2s;
+            width: 50%;
+        }
+
+        .editor-line:nth-child(5)::before {
+            animation-delay: 2.5s;
+            width: 90%;
+        }
+
+        .editor-line:nth-child(6)::before {
+            animation-delay: 3s;
+            width: 40%;
+        }
+
+        @keyframes typing {
+            0% {
+                width: 0;
+            }
+
+            50% {
+                width: 100%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        .editor-features {
+            position: absolute;
+            z-index: 4;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            bottom: 30px;
+            right: 30px;
+        }
+
+        .feature-bubble {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: float 6s infinite ease-in-out;
+            transition: var(--transition);
+        }
+
+        .feature-bubble:hover {
+            transform: translateY(-10px) scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+
+        .feature-bubble:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .feature-bubble:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .feature-bubble:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .feature-bubble:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .feature-bubble:nth-child(5) {
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        .editor-highlight {
+            position: absolute;
+            z-index: 1;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.2) 0%, transparent 70%);
+            filter: blur(30px);
+            animation: pulse 8s infinite;
+        }
+
+        .editor-highlight:nth-child(1) {
+            top: 20%;
+            left: 30%;
+            animation-delay: 0s;
+        }
+
+        .editor-highlight:nth-child(2) {
+            bottom: 10%;
+            right: 20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.2) 0%, transparent 70%);
+            animation-delay: 2s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+
         /* Features Section */
         .features {
             background: var(--dark);
             position: relative;
         }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
-        
+
         .feature-card {
             background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
@@ -290,7 +517,7 @@
             overflow: hidden;
             z-index: 1;
         }
-        
+
         .feature-card:before {
             content: '';
             position: absolute;
@@ -303,36 +530,36 @@
             transition: var(--transition);
             opacity: 0.1;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
-        
+
         .feature-card:hover:before {
             height: 100%;
         }
-        
+
         .feature-icon {
             font-size: 50px;
             color: var(--secondary);
             margin-bottom: 25px;
         }
-        
+
         .feature-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
         }
-        
+
         .feature-card p {
             color: #aaa;
         }
-        
+
         /* Editor Demo */
         .editor-demo {
             position: relative;
         }
-        
+
         .editor-container {
             background: var(--editor-bg);
             border-radius: 15px;
@@ -341,7 +568,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .editor-container:before {
             content: '';
             position: absolute;
@@ -354,7 +581,7 @@
             opacity: 0.3;
             z-index: -1;
         }
-        
+
         .editor-toolbar {
             display: flex;
             flex-wrap: wrap;
@@ -363,7 +590,7 @@
             padding-bottom: 20px;
             border-bottom: 1px solid var(--gray);
         }
-        
+
         .toolbar-btn {
             background: rgba(255, 255, 255, 0.05);
             border: none;
@@ -377,12 +604,12 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .toolbar-btn:hover {
             background: var(--primary);
             color: white;
         }
-        
+
         .editor-content {
             min-height: 400px;
             padding: 20px;
@@ -390,41 +617,42 @@
             border-radius: 8px;
             outline: none;
         }
-        
+
         .editor-content:focus {
             box-shadow: 0 0 0 2px var(--secondary);
         }
-        
+
         .editor-content h2 {
             color: var(--secondary);
             margin-bottom: 15px;
         }
-        
+
         .editor-content p {
             margin-bottom: 15px;
             line-height: 1.7;
         }
-        
-        .editor-content ul, .editor-content ol {
+
+        .editor-content ul,
+        .editor-content ol {
             padding-left: 30px;
             margin-bottom: 15px;
         }
-        
+
         .editor-content li {
             margin-bottom: 8px;
         }
-        
+
         /* Pricing Section */
         .pricing {
             background: var(--dark);
         }
-        
+
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-        
+
         .pricing-card {
             background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
@@ -435,12 +663,12 @@
             overflow: hidden;
             z-index: 1;
         }
-        
+
         .pricing-card.featured {
             border: 2px solid var(--secondary);
             transform: scale(1.05);
         }
-        
+
         .pricing-card:before {
             content: '';
             position: absolute;
@@ -453,61 +681,61 @@
             transition: var(--transition);
             opacity: 0.1;
         }
-        
+
         .pricing-card:hover:before {
             height: 100%;
         }
-        
+
         .pricing-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
             color: var(--secondary);
         }
-        
+
         .price {
             font-size: 48px;
             font-weight: 700;
             color: var(--primary);
             margin: 20px 0;
         }
-        
+
         .price span {
             font-size: 16px;
             color: #aaa;
         }
-        
+
         .pricing-features {
             list-style: none;
             margin: 30px 0;
             text-align: left;
         }
-        
+
         .pricing-features li {
             padding: 10px 0;
             border-bottom: 1px solid var(--gray);
             color: #aaa;
         }
-        
+
         .pricing-features li:before {
             content: '✓';
             color: var(--secondary);
             margin-right: 10px;
         }
-        
+
         /* Testimonials */
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-        
+
         .testimonial-card {
             background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
             padding: 30px;
             position: relative;
         }
-        
+
         .testimonial-card:before {
             content: '"';
             position: absolute;
@@ -518,18 +746,18 @@
             opacity: 0.2;
             font-family: Georgia, serif;
         }
-        
+
         .testimonial-content {
             margin-bottom: 20px;
             font-style: italic;
             color: #aaa;
         }
-        
+
         .testimonial-author {
             display: flex;
             align-items: center;
         }
-        
+
         .author-avatar {
             width: 50px;
             height: 50px;
@@ -541,17 +769,17 @@
             justify-content: center;
             font-weight: bold;
         }
-        
+
         .author-info h4 {
             font-size: 18px;
             margin-bottom: 5px;
         }
-        
+
         .author-info p {
             color: #aaa;
             font-size: 14px;
         }
-        
+
         /* Contact Section */
         .contact-form {
             display: grid;
@@ -559,22 +787,22 @@
             gap: 30px;
             margin-top: 50px;
         }
-        
+
         .form-group {
             margin-bottom: 25px;
         }
-        
+
         .form-group.full {
             grid-column: 1 / -1;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
             color: #aaa;
             font-weight: 500;
         }
-        
+
         .form-control {
             width: 100%;
             padding: 15px;
@@ -585,31 +813,31 @@
             font-size: 16px;
             transition: var(--transition);
         }
-        
+
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
         }
-        
+
         textarea.form-control {
             min-height: 150px;
             resize: vertical;
         }
-        
+
         /* Footer */
         footer {
             background: #0a0a0a;
             padding: 80px 0 30px;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 50px;
             margin-bottom: 60px;
         }
-        
+
         .footer-logo {
             font-size: 28px;
             font-weight: 700;
@@ -617,17 +845,17 @@
             margin-bottom: 20px;
             display: inline-block;
         }
-        
+
         .footer-about p {
             color: #aaa;
             margin-bottom: 30px;
         }
-        
+
         .social-links {
             display: flex;
             gap: 15px;
         }
-        
+
         .social-links a {
             display: flex;
             align-items: center;
@@ -639,13 +867,13 @@
             color: var(--light);
             transition: var(--transition);
         }
-        
+
         .social-links a:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-5px);
         }
-        
+
         .footer-title {
             font-size: 20px;
             color: var(--light);
@@ -653,7 +881,7 @@
             position: relative;
             padding-bottom: 10px;
         }
-        
+
         .footer-title:after {
             content: '';
             position: absolute;
@@ -663,26 +891,26 @@
             height: 2px;
             background: var(--primary);
         }
-        
+
         .footer-links {
             list-style: none;
         }
-        
+
         .footer-links li {
             margin-bottom: 12px;
         }
-        
+
         .footer-links a {
             color: #aaa;
             text-decoration: none;
             transition: var(--transition);
         }
-        
+
         .footer-links a:hover {
             color: var(--primary);
             padding-left: 5px;
         }
-        
+
         .copyright {
             text-align: center;
             padding-top: 30px;
@@ -690,69 +918,106 @@
             color: #666;
             font-size: 14px;
         }
-        
+
         /* Animations */
         .fade-in {
             animation: fadeIn 0.8s ease-out;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         /* Responsive */
+        @media (max-width: 1200px) {
+            .editor-background {
+                width: 650px;
+                height: 450px;
+                right: -150px;
+            }
+        }
+
         @media (max-width: 992px) {
             .hero h1 {
                 font-size: 50px;
             }
-            
+
             .editor-container {
                 padding: 20px;
             }
-            
+
             .contact-form {
                 grid-template-columns: 1fr;
             }
+
+            .editor-background {
+                width: 500px;
+                height: 350px;
+                right: -200px;
+                opacity: 0.7;
+            }
+
+            .feature-bubble {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
-        
+
         @media (max-width: 768px) {
             nav ul {
                 display: none;
             }
-            
+
             .mobile-toggle {
                 display: block;
             }
-            
+
             .hero h1 {
                 font-size: 40px;
             }
-            
+
             .hero p {
                 font-size: 18px;
             }
-            
+
             .section-title {
                 font-size: 32px;
             }
-            
+
             .hero-btns {
                 flex-direction: column;
                 gap: 15px;
                 align-items: flex-start;
             }
-            
+
             .btn-outline {
                 margin-left: 0;
             }
-            
+
             .pricing-card.featured {
                 transform: scale(1);
+            }
+
+            .editor-background {
+                display: none;
+            }
+
+            .editor-features {
+                display: none;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Angular App Root -->
     <fusion-editor-app>
@@ -778,17 +1043,54 @@
             </div>
         </header>
 
-        <!-- Home Section -->
+        <!-- Home Section with Animated Background -->
         <section id="home" class="hero">
-            <div class="hero-pattern">
-                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="10 5"></path>
-                </svg>
+            <div class="editor-background">
+                <div class="editor-highlight"></div>
+                <div class="editor-highlight"></div>
+
+                <div class="editor-header">
+                    <div class="editor-tabs">
+                        <div class="editor-tab active">document.md</div>
+                        <div class="editor-tab">notes.txt</div>
+                        <div class="editor-tab">draft.html</div>
+                    </div>
+                </div>
+
+                <div class="editor-body">
+                    <div class="editor-line"></div>
+                    <div class="editor-line"></div>
+                    <div class="editor-line"></div>
+                    <div class="editor-line"></div>
+                    <div class="editor-line"></div>
+                    <div class="editor-line"></div>
+                </div>
+
+                <div class="editor-features">
+                    <div class="feature-bubble">
+                        <i class="fas fa-bold"></i>
+                    </div>
+                    <div class="feature-bubble">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <div class="feature-bubble">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="feature-bubble">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div class="feature-bubble">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
             </div>
+
             <div class="container">
                 <div class="hero-content">
                     <h1>The Ultimate Editor for Modern Content Creation</h1>
-                    <p>Fusion Editor is a powerful, extensible rich text editor built for the modern web. Create beautiful documents with ease, collaborate in real-time, and integrate seamlessly with your application.</p>
+                    <p>Fusion Editor is a powerful, extensible rich text editor built for the modern web. Create
+                        beautiful documents with ease, collaborate in real-time, and integrate seamlessly with your
+                        application.</p>
                     <div class="hero-btns">
                         <a href="#demo" class="btn" (click)="scrollTo('demo')">Try Demo</a>
                         <a href="#pricing" class="btn btn-secondary" (click)="scrollTo('pricing')">Get Started</a>
@@ -796,13 +1098,14 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Features Section -->
         <section id="features" class="features fade-in">
             <div class="container">
                 <h2 class="section-title">Powerful Features</h2>
-                <p class="section-subtitle">Fusion Editor comes packed with everything you need for modern content creation and collaboration.</p>
-                
+                <p class="section-subtitle">Fusion Editor comes packed with everything you need for modern content
+                    creation and collaboration.</p>
+
                 <div class="features-grid">
                     <div class="feature-card" *ngFor="let feature of features">
                         <div class="feature-icon">
@@ -814,13 +1117,14 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Demo Section -->
         <section id="demo" class="editor-demo fade-in">
             <div class="container">
                 <h2 class="section-title">Live Demo</h2>
-                <p class="section-subtitle">Experience the power and simplicity of Fusion Editor right in your browser.</p>
-                
+                <p class="section-subtitle">Experience the power and simplicity of Fusion Editor right in your browser.
+                </p>
+
                 <div class="editor-container">
                     <div class="editor-toolbar">
                         <button class="toolbar-btn"><i class="fas fa-bold"></i></button>
@@ -846,8 +1150,9 @@
                     </div>
                     <div class="editor-content" contenteditable="true">
                         <h2>Welcome to Fusion Editor</h2>
-                        <p>This is a live demo of our powerful rich text editor. Try editing this text to experience the intuitive interface and features.</p>
-                        
+                        <p>This is a live demo of our powerful rich text editor. Try editing this text to experience the
+                            intuitive interface and features.</p>
+
                         <p>You can:</p>
                         <ul>
                             <li>Format text with <strong>bold</strong>, <em>italic</em>, or <u>underline</u></li>
@@ -857,22 +1162,27 @@
                             <li>Undo and redo changes</li>
                             <li>And much more!</li>
                         </ul>
-                        
-                        <p>Fusion Editor is designed for both technical and non-technical users. With its clean interface and powerful features, you can create professional documents in minutes.</p>
-                        
+
+                        <p>Fusion Editor is designed for both technical and non-technical users. With its clean
+                            interface and powerful features, you can create professional documents in minutes.</p>
+
                         <h3>Get Started Today</h3>
-                        <p>Ready to integrate Fusion Editor into your application? <a href="#pricing" style="color: var(--secondary);" (click)="scrollTo('pricing')">View our pricing plans</a> or <a href="#contact" style="color: var(--secondary);" (click)="scrollTo('contact')">contact us</a> for custom solutions.</p>
+                        <p>Ready to integrate Fusion Editor into your application? <a href="#pricing"
+                                style="color: var(--secondary);" (click)="scrollTo('pricing')">View our pricing
+                                plans</a> or <a href="#contact" style="color: var(--secondary);"
+                                (click)="scrollTo('contact')">contact us</a> for custom solutions.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <!-- Pricing Section -->
         <section id="pricing" class="pricing fade-in">
             <div class="container">
                 <h2 class="section-title">Simple Pricing</h2>
-                <p class="section-subtitle">Choose the plan that works best for you and your team. All plans include our core features.</p>
-                
+                <p class="section-subtitle">Choose the plan that works best for you and your team. All plans include our
+                    core features.</p>
+
                 <div class="pricing-grid">
                     <div class="pricing-card" [class.featured]="plan.featured" *ngFor="let plan of plans">
                         <h3>{{plan.title}}</h3>
@@ -883,11 +1193,11 @@
                         <a href="#" class="btn" [class.btn-secondary]="plan.featured">{{plan.button}}</a>
                     </div>
                 </div>
-                
+
                 <div style="margin-top: 100px;">
                     <h2 class="section-title">What Our Users Say</h2>
                     <p class="section-subtitle">Don't just take our word for it - hear from our satisfied customers.</p>
-                    
+
                     <div class="testimonials-grid">
                         <div class="testimonial-card" *ngFor="let testimonial of testimonials">
                             <div class="testimonial-content">{{testimonial.content}}</div>
@@ -903,13 +1213,13 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Contact Section -->
         <section id="contact" class="contact fade-in">
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
                 <p class="section-subtitle">Have questions about Fusion Editor? Our team is ready to help.</p>
-                
+
                 <form #contactForm="ngForm" (ngSubmit)="sendMessage()">
                     <div class="contact-form">
                         <div class="form-group">
@@ -949,7 +1259,7 @@
                 </form>
             </div>
         </section>
-        
+
         <!-- Footer -->
         <footer>
             <div class="container">
@@ -959,7 +1269,8 @@
                             <i class="fas fa-code"></i>
                             Fusion Editor
                         </a>
-                        <p>The next-generation rich text editor for modern web applications. Powerful, customizable, and developer-friendly.</p>
+                        <p>The next-generation rich text editor for modern web applications. Powerful, customizable, and
+                            developer-friendly.</p>
                         <div class="social-links">
                             <a href="#"><i class="fab fa-github"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -1010,13 +1321,13 @@
         const { CommonModule } = ng.common;
         const { BrowserModule } = ng.platformBrowser;
         const { FormsModule } = ng.forms;
-        
+
         // App Component
         Component({
             selector: 'fusion-editor-app',
             template: document.querySelector('fusion-editor-app').innerHTML
         }).Class({
-            constructor: function() {
+            constructor: function () {
                 this.features = [
                     { icon: 'fas fa-font', title: 'Rich Text Formatting', description: 'Full text formatting options including bold, italic, underline, strikethrough, and more.' },
                     { icon: 'fas fa-heading', title: 'Headings & Paragraphs', description: 'Multiple heading levels and paragraph styles for structured content.' },
@@ -1027,7 +1338,7 @@
                     { icon: 'fas fa-comments', title: 'Real-time Collaboration', description: 'Work together with your team in real-time with collaborative editing.' },
                     { icon: 'fas fa-history', title: 'Version History', description: 'Track changes and revert to previous versions with our built-in history.' }
                 ];
-                
+
                 this.plans = [
                     {
                         title: 'Starter',
@@ -1076,7 +1387,7 @@
                         featured: false
                     }
                 ];
-                
+
                 this.testimonials = [
                     {
                         content: "Fusion Editor has transformed how our content team works. The collaboration features alone have saved us dozens of hours each week.",
@@ -1094,44 +1405,44 @@
                         role: "Product Manager, Innovate Inc"
                     }
                 ];
-                
+
                 this.isScrolled = false;
-                
+
                 // Scroll event listener
                 window.onscroll = () => {
                     this.isScrolled = window.scrollY > 50;
                 };
             },
-            
-            scrollTo: function(id) {
+
+            scrollTo: function (id) {
                 const element = document.getElementById(id);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
                 this.toggleMenu();
             },
-            
-            toggleMenu: function() {
+
+            toggleMenu: function () {
                 const nav = document.querySelector('nav ul');
                 if (window.innerWidth < 768) {
                     nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
                 }
             },
-            
-            sendMessage: function() {
+
+            sendMessage: function () {
                 alert('Thank you for your message! We will get back to you soon.');
             }
         });
-        
+
         // App Module
         NgModule({
             imports: [BrowserModule, FormsModule],
             declarations: [AppComponent],
             bootstrap: [AppComponent]
         }).Class({
-            constructor: function() {}
+            constructor: function () { }
         });
-        
+
         // Create App Component
         const AppComponent = class {
             static annotations = [
@@ -1141,7 +1452,7 @@
                 })
             ];
         };
-        
+
         // Bootstrap the application
         document.addEventListener('DOMContentLoaded', () => {
             ng.platformBrowserDynamic
@@ -1150,4 +1461,5 @@
         });
     </script>
 </body>
+
 </html>
