@@ -495,27 +495,100 @@
             }
         }
 
-        /* Features Section */
+        /* Updated Features Section */
         .features {
             background: var(--dark);
             position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 107, 107, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(78, 205, 196, 0.05) 0%, transparent 30%);
+            z-index: 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-tagline {
+            color: var(--secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-category {
+            margin-bottom: 50px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 28px;
+            color: white;
+        }
+
+        .category-title {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--light), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            gap: 25px;
         }
 
         .feature-card {
             background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
-            padding: 40px 30px;
+            padding: 30px;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .feature-card:before {
@@ -533,7 +606,8 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 107, 107, 0.3);
         }
 
         .feature-card:hover:before {
@@ -541,18 +615,136 @@
         }
 
         .feature-icon {
-            font-size: 50px;
+            font-size: 40px;
             color: var(--secondary);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            color: var(--primary);
+            transform: scale(1.1);
         }
 
         .feature-card h3 {
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 15px;
+            color: var(--light);
         }
 
         .feature-card p {
             color: #aaa;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .feature-tag {
+            background: rgba(78, 205, 196, 0.15);
+            color: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .feature-highlight {
+            grid-column: 1 / -1;
+            background: rgba(30, 30, 30, 0.9);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .highlight-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .highlight-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .highlight-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .highlight-badge {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 18px;
+            transform: rotate(5deg);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .feature-highlight {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .highlight-content {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .highlight-badge {
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .category-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .highlight-badge {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
         }
 
         /* Editor Demo */
@@ -1099,20 +1291,238 @@
             </div>
         </section>
 
-        <!-- Features Section -->
         <section id="features" class="features fade-in">
             <div class="container">
-                <h2 class="section-title">Powerful Features</h2>
-                <p class="section-subtitle">Fusion Editor comes packed with everything you need for modern content
-                    creation and collaboration.</p>
+                <div class="section-header">
+                    <div class="section-tagline">Powerful Features</div>
+                    <h2 class="section-title">Everything You Need for Modern Content Creation</h2>
+                    <p class="section-subtitle">Fusion Editor combines the best of rich text editing with powerful
+                        collaboration features</p>
+                </div>
 
-                <div class="features-grid">
-                    <div class="feature-card" *ngFor="let feature of features">
-                        <div class="feature-icon">
-                            <i [class]="feature.icon"></i>
+                <div class="features-container">
+                    <!-- Formatting Features -->
+                    <div class="feature-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-text-height"></i>
+                            </div>
+                            <h3 class="category-title">Rich Formatting</h3>
                         </div>
-                        <h3>{{feature.title}}</h3>
-                        <p>{{feature.description}}</p>
+
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bold"></i>
+                                </div>
+                                <h3>Text Formatting</h3>
+                                <p>Full control over text styling with bold, italic, underline, strikethrough, and color
+                                    options.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Bold</span>
+                                    <span class="feature-tag">Italic</span>
+                                    <span class="feature-tag">Underline</span>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-heading"></i>
+                                </div>
+                                <h3>Headings & Blocks</h3>
+                                <p>Multiple heading levels, paragraphs, blockquotes, and code blocks for structured
+                                    content.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">H1-H6</span>
+                                    <span class="feature-tag">Blockquote</span>
+                                    <span class="feature-tag">Code</span>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-list"></i>
+                                </div>
+                                <h3>Lists & Organization</h3>
+                                <p>Create ordered and unordered lists with nesting support. Organize content with
+                                    dividers.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Bullet Lists</span>
+                                    <span class="feature-tag">Numbered Lists</span>
+                                    <span class="feature-tag">Task Lists</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Features -->
+                    <div class="feature-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <h3 class="category-title">Media & Embeds</h3>
+                        </div>
+
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <h3>Links & References</h3>
+                                <p>Create hyperlinks, anchor references, and link previews. Manage internal and external
+                                    links.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">URLs</span>
+                                    <span class="feature-tag">Anchors</span>
+                                    <span class="feature-tag">Previews</span>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-photo-film"></i>
+                                </div>
+                                <h3>Images & Video</h3>
+                                <p>Embed images and videos with resize controls, captions, and responsive layouts.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Drag & Drop</span>
+                                    <span class="feature-tag">Resize</span>
+                                    <span class="feature-tag">Captions</span>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-table"></i>
+                                </div>
+                                <h3>Advanced Tables</h3>
+                                <p>Create complex tables with merged cells, column controls, and custom styling options.
+                                </p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Merged Cells</span>
+                                    <span class="feature-tag">Column Controls</span>
+                                    <span class="feature-tag">Sorting</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Features -->
+                    <div class="feature-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 class="category-title">Advanced</h3>
+                        </div>
+
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3>Code Blocks</h3>
+                                <p>Syntax highlighting for 100+ languages, line numbers, and code copying functionality.
+                                </p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Syntax Highlighting</span>
+                                    <!-- <span class="feature-tag">Line Numbers</span> -->
+                                    <span class="feature-tag">Copy to Clipboard</span>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-slash"></i>
+                                </div>
+                                <h3>Slash Commands</h3>
+                                <p>Quickly insert elements with intuitive slash commands. Type "/" to see available
+                                    options.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Quick Insert</span>
+                                    <span class="feature-tag"> / commands</span>
+                                    <!-- <span class="feature-tag">Customizable</span> -->
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-history"></i>
+                                </div>
+                                <h3>Version History</h3>
+                                <p>Track changes over time, restore previous versions, and see who made changes.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Revision History</span>
+                                    <span class="feature-tag">Restore Points</span>
+                                    <span class="feature-tag">Change Tracking</span>
+                                </div>
+                            </div>
+
+                            <!-- <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <h3>Export Options</h3>
+                                <p>Export your content as HTML, Markdown, PDF, or Word documents with one click.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">HTML</span>
+                                    <span class="feature-tag">Markdown</span>
+                                    <span class="feature-tag">PDF</span>
+                                    <span class="feature-tag">Word</span>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3>Mobile Optimized</h3>
+                                <p>Full functionality on mobile devices with touch-friendly controls and responsive
+                                    layout.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">Touch Support</span>
+                                    <span class="feature-tag">Responsive</span>
+                                    <span class="feature-tag">Mobile UI</span>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-plug"></i>
+                                </div>
+                                <h3>API & Extensions</h3>
+                                <p>Extend functionality with our powerful API or choose from pre-built extensions.</p>
+                                <div class="feature-tags">
+                                    <span class="feature-tag">JavaScript API</span>
+                                    <span class="feature-tag">Custom Plugins</span>
+                                    <span class="feature-tag">Extensions</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- Highlight Feature -->
+                    <div class="feature-highlight">
+                        <div class="highlight-content">
+                            <div class="highlight-badge">New!</div>
+                            <h2>Real-time Collaboration</h2>
+                            <p>Work together seamlessly with your team. See cursor positions of other collaborators,
+                                track changes in real-time, and communicate with built-in comments.</p>
+                            <div class="feature-tags">
+                                <span class="feature-tag">Multi-user Editing</span>
+                                <span class="feature-tag">Live Cursors</span>
+                                <span class="feature-tag">Comments & Threads</span>
+                                <span class="feature-tag">Version History</span>
+                            </div>
+                        </div>
+                        <div class="highlight-image">
+                            <!-- This would be an image in production -->
+                            <div
+                                style="width: 100%; height: 250px; background: linear-gradient(135deg, #2c2c2c, #1a1a1a); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #4ECDC4; font-weight: bold;">
+                                Collaboration Preview
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
