@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fusion Editor - Modern Rich Text Editor</title>
+    <title>Wryt Labs</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -897,7 +897,7 @@
 
         .highlight-badge {
             position: absolute;
-            top: -20px;
+            top: -14px;
             right: -20px;
             background: var(--primary);
             color: white;
@@ -1123,6 +1123,11 @@
         .price span {
             font-size: 16px;
             color: #aaa;
+        }
+
+        .price label {
+            font-size: 16px;
+            color: var(--primary);
         }
 
         .pricing-features {
@@ -1431,7 +1436,6 @@
             transition: var(--transition);
             text-decoration: none;
             box-shadow: 0 5px 15px rgba(74, 111, 255, 0.3);
-            width: 100%;
             position: relative;
             overflow: hidden;
         }
@@ -1566,7 +1570,10 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 20px;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
         }
 
         .footer-about p {
@@ -1758,6 +1765,34 @@
                 display: none;
             }
         }
+
+        .wryt span {
+            font-weight: 600;
+        }
+
+        .write {
+            text-decoration: underline;
+            text-decoration-color: #4F46E5;
+            /* Indigo for Write */
+        }
+
+        .reflect {
+            text-decoration: underline;
+            text-decoration-color: #10B981;
+            /* Emerald for Reflect */
+        }
+
+        .yield {
+            text-decoration: underline;
+            text-decoration-color: #F59E0B;
+            /* Amber for Yield */
+        }
+
+        .transform {
+            text-decoration: underline;
+            text-decoration-color: #EF4444;
+            /* Red for Transform */
+        }
     </style>
 </head>
 
@@ -1766,8 +1801,8 @@
     <header id="main-header">
         <div class="container header-container">
             <a href="#home" class="logo">
-                <img src="logo.png" alt="Fusion Editor Logo" width="48" height="48" class="logo-img" />
-                Fusion Editor
+                <img src="logo.png" alt="WrytNg Logo" width="48" height="48" class="logo-img" />
+                Wryt Labs
             </a>
             <nav>
                 <ul id="desktop-menu">
@@ -1865,12 +1900,12 @@
         <div class="container">
             <div class="hero-content">
                 <h1>The Ultimate Editor for Modern Content Creation</h1>
-                <p>Fusion Editor is a powerful, extensible rich text editor built for the modern web. Create
-                    beautiful documents with ease, collaborate in real-time, and integrate seamlessly with your
-                    application.</p>
+                <p>WrytNg is a powerful, extensible rich text editor built for the native angular apps. Create beautiful
+                    documents, export your content in a jiffy, collaborate in real-time, and integrate seamlessly with
+                    your enterprise apps with the WrytNg rich text editor</p>
                 <div class="hero-btns">
                     <a href="#demo" class="btn">Try Demo</a>
-                    <a href="#pricing" class="btn btn-secondary">Get Started</a>
+                    <!-- <a href="#pricing" class="btn btn-secondary">Get Started</a> -->
                 </div>
             </div>
         </div>
@@ -1882,7 +1917,7 @@
             <div class="section-header">
                 <div class="section-tagline">Powerful Features</div>
                 <h2 class="section-title">Everything You Need for Modern Content Creation</h2>
-                <p class="section-subtitle">Fusion Editor combines the best of rich text editing with powerful
+                <p class="section-subtitle">WrytNg combines the best of rich text editing with powerful
                     collaboration features</p>
             </div>
 
@@ -1956,12 +1991,12 @@
                                 <i class="fas fa-link"></i>
                             </div>
                             <h3>Links & References</h3>
-                            <p>Create hyperlinks, anchor references, and link previews. Manage internal and external
-                                links.</p>
+                            <!-- <p>Create hyperlinks, anchor references, and link previews. Manage internal and external links.</p> -->
+                            <p>Create hyperlinks and anchor references. Manage internal and external links.</p>
                             <div class="feature-tags">
                                 <span class="feature-tag">URLs</span>
                                 <span class="feature-tag">Anchors</span>
-                                <span class="feature-tag">Previews</span>
+                                <!-- <span class="feature-tag">Previews</span> -->
                             </div>
                         </div>
 
@@ -1972,7 +2007,7 @@
                             <h3>Images & Video</h3>
                             <p>Embed images and videos with resize controls, captions, and responsive layouts.</p>
                             <div class="feature-tags">
-                                <span class="feature-tag">Drag & Drop</span>
+                                <!-- <span class="feature-tag">Drag & Drop</span> -->
                                 <span class="feature-tag">Resize</span>
                                 <span class="feature-tag">Captions</span>
                             </div>
@@ -1986,9 +2021,9 @@
                             <p>Create complex tables with merged cells, column controls, and custom styling options.
                             </p>
                             <div class="feature-tags">
-                                <span class="feature-tag">Merged Cells</span>
-                                <span class="feature-tag">Column Controls</span>
-                                <span class="feature-tag">Sorting</span>
+                                <span class="feature-tag">Row & Col Controls</span>
+                                <span class="feature-tag">Custom Styles</span>
+                                <!-- <span class="feature-tag">Sorting</span> -->
                             </div>
                         </div>
                     </div>
@@ -2009,7 +2044,8 @@
                                 <i class="fas fa-code"></i>
                             </div>
                             <h3>Code Blocks</h3>
-                            <p>Syntax highlighting for 100+ languages, line numbers, and code copying functionality.
+                            <!-- <p>Syntax highlighting for 100+ languages, line numbers, and code copying functionality. -->
+                            <p>Syntax highlighting for 100+ languages and code copying functionality.
                             </p>
                             <div class="feature-tags">
                                 <span class="feature-tag">Syntax Highlighting</span>
@@ -2019,7 +2055,7 @@
 
                         <div class="feature-card">
                             <div class="feature-icon">
-                                <i class="fas fa-slash"></i>
+                                <i class="fas fa-slash fa-flip-horizontal"></i>
                             </div>
                             <h3>Slash Commands</h3>
                             <p>Quickly insert elements with intuitive slash commands. Type "/" to see available
@@ -2037,9 +2073,11 @@
                             <h3>Version History</h3>
                             <p>Track changes over time, restore previous versions, and see who made changes.</p>
                             <div class="feature-tags">
-                                <span class="feature-tag">Revision History</span>
+                                <span class="feature-tag" style="color: red">Coming Soon!</span>
+
+                                <!-- <span class="feature-tag">Revision History</span>
                                 <span class="feature-tag">Restore Points</span>
-                                <span class="feature-tag">Change Tracking</span>
+                                <span class="feature-tag">Change Tracking</span> -->
                             </div>
                         </div>
                     </div>
@@ -2048,7 +2086,7 @@
                 <!-- Highlight Feature -->
                 <div class="feature-highlight">
                     <div class="highlight-content">
-                        <div class="highlight-badge">New!</div>
+                        <div class="highlight-badge">Coming Soon!</div>
                         <h2>Real-time Collaboration</h2>
                         <p>Work together seamlessly with your team. See cursor positions of other collaborators,
                             track changes in real-time, and communicate with built-in comments.</p>
@@ -2074,7 +2112,7 @@
     <section id="demo" class="editor-demo fade-in">
         <div class="container">
             <h2 class="section-title">Live Demo</h2>
-            <p class="section-subtitle">Experience the power and simplicity of Fusion Editor right in your browser.
+            <p class="section-subtitle">Experience the power and simplicity of WrytNg right in your browser.
             </p>
 
             <div class="editor-container">
@@ -2101,7 +2139,7 @@
                     <button class="toolbar-btn"><i class="fas fa-redo"></i></button>
                 </div>
                 <div class="editor-content" contenteditable="true">
-                    <h2>Welcome to Fusion Editor</h2>
+                    <h2>Welcome to WrytNg</h2>
                     <p>This is a live demo of our powerful rich text editor. Try editing this text to experience the
                         intuitive interface and features.</p>
 
@@ -2115,11 +2153,11 @@
                         <li>And much more!</li>
                     </ul>
 
-                    <p>Fusion Editor is designed for both technical and non-technical users. With its clean
+                    <p>WrytNg is designed for both technical and non-technical users. With its clean
                         interface and powerful features, you can create professional documents in minutes.</p>
 
                     <h3>Get Started Today</h3>
-                    <p>Ready to integrate Fusion Editor into your application? <a href="#pricing"
+                    <p>Ready to integrate WrytNg into your application? <a href="#pricing"
                             style="color: var(--secondary);">View our pricing
                             plans</a> or <a href="#contact" style="color: var(--secondary);">contact us</a> for custom
                         solutions.</p>
@@ -2131,15 +2169,16 @@
     <!-- Pricing Section -->
     <section id="pricing" class="pricing fade-in">
         <div class="container">
-            <h2 class="section-title">Simple Pricing</h2>
+            <h2 class="section-title">Flexible Plans, Powerful Value</h2>
             <p class="section-subtitle">Choose the plan that works best for you and your team. All plans include our
                 core features.</p>
 
             <div class="pricing-grid">
-                <!-- Starter Plan -->
                 <div class="pricing-card">
                     <h3>Starter</h3>
-                    <div class="price">$0<span>/forever</span></div>
+                    <!-- <div class="price">$0<span>/forever</span></div> -->
+
+                    <div class="price"><label>Contact Sales!</label></div>
                     <ul class="pricing-features">
                         <li>Basic text formatting</li>
                         <li>Up to 3 documents</li>
@@ -2147,13 +2186,13 @@
                         <li>1GB storage</li>
                         <li>Markdown export</li>
                     </ul>
-                    <a href="#" class="btn">Get Started</a>
+                    <!-- <a href="#" class="btn">Get Started</a> -->
                 </div>
 
-                <!-- Pro Plan (Featured) -->
                 <div class="pricing-card featured">
                     <h3>Pro</h3>
-                    <div class="price">$9<span>/per month</span></div>
+                    <!-- <div class="price">$9<span>/per month</span></div> -->
+                    <div class="price"><label>Contact Sales!</label></div>
                     <ul class="pricing-features">
                         <li>Advanced formatting</li>
                         <li>Unlimited documents</li>
@@ -2163,13 +2202,13 @@
                         <li>Collaboration features</li>
                         <li>Version history (30 days)</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary">Start Free Trial</a>
+                    <!-- <a href="#" class="btn btn-secondary">Start Free Trial</a> -->
                 </div>
 
-                <!-- Business Plan -->
                 <div class="pricing-card">
                     <h3>Business</h3>
-                    <div class="price">$29<span>/per month</span></div>
+                    <!-- <div class="price">$29<span>/per month</span></div> -->
+                    <div class="price"><label>Contact Sales!</label></div>
                     <ul class="pricing-features">
                         <li>All Pro features</li>
                         <li>Team management</li>
@@ -2179,18 +2218,17 @@
                         <li>Version history (1 year)</li>
                         <li>Dedicated account manager</li>
                     </ul>
-                    <a href="#" class="btn">Contact Sales</a>
+                    <!-- <a href="#" class="btn">Contact Sales</a> -->
                 </div>
             </div>
 
-            <div style="margin-top: 100px;">
+            <!-- <div style="margin-top: 100px;">
                 <h2 class="section-title">What Our Users Say</h2>
                 <p class="section-subtitle">Don't just take our word for it - hear from our satisfied customers.</p>
 
                 <div class="testimonials-grid">
-                    <!-- Testimonial 1 -->
                     <div class="testimonial-card">
-                        <div class="testimonial-content">"Fusion Editor has transformed how our content team works. The
+                        <div class="testimonial-content">"WrytNg has transformed how our content team works. The
                             collaboration features alone have saved us dozens of hours each week."</div>
                         <div class="testimonial-author">
                             <div class="author-avatar">S</div>
@@ -2201,7 +2239,6 @@
                         </div>
                     </div>
 
-                    <!-- Testimonial 2 -->
                     <div class="testimonial-card">
                         <div class="testimonial-content">"As a developer, I appreciate how easy it is to integrate and
                             customize. The API is well-documented and the community support is excellent."</div>
@@ -2214,7 +2251,6 @@
                         </div>
                     </div>
 
-                    <!-- Testimonial 3 -->
                     <div class="testimonial-card">
                         <div class="testimonial-content">"We switched from another editor and haven't looked back. The
                             performance and feature set are unmatched at this price point."</div>
@@ -2227,7 +2263,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -2237,10 +2273,10 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h2>Contact Us</h2>
-                    <p>Have questions about Fusion Editor? Our team is ready to help you with any inquiries.</p>
+                    <p>Have questions about WrytNg? Our team is ready to help you with any inquiries.</p>
 
                     <div class="contact-details">
-                        <div class="detail-item">
+                        <!-- <div class="detail-item">
                             <div class="detail-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
@@ -2258,15 +2294,15 @@
                                 <h3>Phone Number</h3>
                                 <p>+1 (555) 123-4567</p>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="detail-item">
                             <div class="detail-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="detail-content">
-                                <h3>Email Address</h3>
-                                <p>contact@fusioneditor.io</p>
+                                <h3>Get in touch</h3>
+                                <p>sale@wrytlabs.com</p>
                             </div>
                         </div>
                     </div>
@@ -2376,11 +2412,16 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <a href="#" class="footer-logo">
-                        <i class="fas fa-code"></i>
-                        Fusion Editor
+                        <img src="logo.png" alt="WrytNg Logo" width="36" height="36" class="logo-img" />
+                        Wryt Labs
                     </a>
-                    <p>The next-generation rich text editor for modern web applications. Powerful, customizable, and
-                        developer-friendly.</p>
+                    <p><span class="wryt">
+                            <span class="write">W</span>rite
+                            <span class="reflect">R</span>eflect
+                            <span class="yield">Y</span>ield
+                            <span class="transform">T</span>ransform
+                        </span>
+                        Write smarter. Learn faster. Build better—with WrytLabs..</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-github"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -2412,14 +2453,14 @@
                 <div class="footer-links-container">
                     <h3 class="footer-title">Contact</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Developer St, San Francisco</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> contact@fusioneditor.io</li>
+                        <!-- <li><i class="fas fa-map-marker-alt"></i> 123 Developer St, San Francisco</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li> -->
+                        <li><i class="fas fa-envelope"></i> sales@wrytlabs.com</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2023 Fusion Editor. All rights reserved.
+                &copy; 2023 Wryt Labs. All rights reserved.
             </div>
         </div>
     </footer>
